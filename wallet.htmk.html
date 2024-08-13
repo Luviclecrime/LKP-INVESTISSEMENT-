@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Gestion des Transactions</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f5f5f5;
+		}
+		.container {
+			max-width: 95%;
+			width: 100%;
+			margin: 20px auto;
+			background-color: #f0f0f0;
+			padding: 20px;
+			border: 1px solid #ddd;
+			border-radius: 10px;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+		}
+		.retrait, .depot {
+			padding: 15px;
+			border-radius: 10px;
+			margin-bottom: 20px;
+		}
+		.retrait {
+			background-color: red;
+			color: white;
+		}
+		.depot {
+			background-color: blue;
+			color: yellow;
+		}
+		button {
+			border-radius: 50px;
+			padding: 15px 30px;
+			font-size: 1.2em;
+			cursor: pointer;
+			border: none;
+			background-color: #007BFF;
+			color: white;
+			transition: background-color 0.3s, transform 0.3s;
+			width: 100%;
+			max-width: 350px;
+			margin-bottom: 20px;
+		}
+		button:active {
+			background-color: #003f7f;
+		}
+		button:hover {
+			background-color: #0056b3;
+			transform: scale(1.05);
+		}
+		.footer {
+			margin-top: 50px;
+			text-align: center;
+			color: #555;
+			padding: 15px;
+			border-top: 1px solid #ddd;
+			background-color: #f0f0f0;
+			border-radius: 10px;
+		}
+		.footer img {
+			width: 100px;
+			height: 100px;
+		}
+		h1, h3, p {
+			margin: 0 0 10px 0;
+		}
+		input[type="text"] {
+			font-size: 1.2em;
+			width: 100%;
+			max-width: 300px;
+			height: 40px;
+			margin-top: 20px;
+			padding: 5px;
+			border: 1px solid #ccc;
+			border-radius: 10px;
+		}
+		#solde {
+			margin-left: 15px;
+		}
+		#message-retrait {
+			margin-top: 20px;
+			color: red;
+			font-weight: bold;
+		}
+		@media (max-width: 768px) {
+			.container {
+				padding: 20px;
+			}
+			button {
+				padding: 14px 25px;
+				font-size: 1em;
+			}
+		}
+		@media (max-width: 480px) {
+			.container {
+				padding: 15px;
+			}
+			button {
+				padding: 12px 20px;
+				font-size: 0.9em;
+			}
+		}
+	</style>
+	<script src="javas.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Solde du compte: <input type="text" id="solde" disabled></h1>
+		<input type="text" id="retrait-numero" placeholder="Entrez votre numéro de retrait">
+		<input type="text" id="retrait-montant" placeholder="Entrez le montant à retirer">
+		<button id="retirer-btn">Retirer</button>
+		<p id="message-retrait"></p>
+		<a href="recharge.html"><button class="depot">Dépôt</button></a>
+		<div class="retrait">
+			<h3 style="text-align: center;">Informations Nécessaires</h3>
+			<h3>Retrait:</h3>
+			<ol>
+				<li>Le retrait minimal est de 3000 XAF</li>
+				<li>Les retraits se font du lundi au vendredi</li>
+				<li>Pas de frais de retrait</li>
+				<li>Les retraits se font entre 9h et 19h30</li>
+				<li>Vos gains arrivent dans vos comptes dans les 3h qui suivent</li>
+				<li>Si vos gains n'arrivent pas, veuillez contacter le service client</li>
+			</ol>
+		</div>
+		<div class="depot">
+			<h3>Les Dépôts:</h3>
+			<ol>
+				<li>Le dépôt minimum est de 5000 XAF</li>
+				<li>Les dépôts se font à la même heure que les retraits</li>
+				<li>N'effectuez pas vos dépôts à une heure où l'entreprise n'est pas encore ouverte</li>
+				<li>L'entreprise ouvre à 9h et ferme à 19h30</li>
+			</ol>
+		</div>
+	</div>
+
+	<h3><marquee>Votre lien de parrainage</marquee></h3>
+	<input type="text" id="parainage" disabled>
+	<button id="copiel">Copier</button>
+
+	<div class="footer">
+		<img src="client.jpg" alt="Service client">
+		<br>
+		<a href="https://t.me/+lfoZzxYsDNFkODM0"><b><u>Service Client</u></b></a>
+	</div>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			document.getElementById('solde').value = '0 XAF';
+
+			var userId = Math.floor(Math.random() * 100000); 
+			var parrainageLink = "https://monsite.com/parrainage?ref=" + userId;
+			document.getElementById('parainage').value = parrainageLink;
+
+			document.getElementById('copiel').addEventListener('click', function() {
+				var copyText = document.getElementById('parainage');
+				copyText.disabled = false;
+				copyText.select();
+				document.execCommand('copy');
+				copyText.disabled = true;
+				alert("Lien de parrainage copié!");
+			});
+
+			document.getElementById('retirer-btn').addEventListener('click', function() {
+				var soldeElement = document.getElementById('solde');
+				var montantRetrait = parseInt(document.getElementById('retrait-montant').value);
+				var soldeActuel = parseInt(soldeElement.value.replace('XAF', '').trim());
+				var messageRetrait = document.getElementById('message-retrait');
+
+				if (montantRetrait < 3000) {
+					messageRetrait.textContent = "Erreur : Le retrait minimal est de 3000 XAF.";
+				} else if (montantRetrait > soldeActuel) {
+					messageRetrait.textContent = "Erreur : Solde insuffisant pour ce retrait.";
+				} else {
+					soldeElement.value = (soldeActuel - montantRetrait) + " XAF";
+					messageRetrait.textContent = "Retrait de " + montantRetrait + " XAF en cours. Veuillez attendre l'arrivée de vos gains.";
+					messageRetrait.style.color = "green";
+				}
+			});
+		});
+	</script>
+</body>
+</html>

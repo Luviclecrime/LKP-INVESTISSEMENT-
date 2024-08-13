@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello, World!</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    header {
+      margin: 10px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-around;
+      background-color: #ffffff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    button {
+      border-radius: 50px;
+      padding: 15px 30px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    u {
+      color: red;
+      background-color: white;
+    }
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+    button:active {
+      background-color: #003f7f;
+    }
+    .unique {
+      background-color: red;
+    }
+    .unique2 {
+      background-color: green;
+    }
+    .unique3 {
+      background-color: gold;
+    }
+    .unique4 {
+      background-color: pink;
+    }
+    .unique5 {
+      background-color: darkgreen;
+    }
+    .unique6 {
+      background-color: gray;
+    }
+  </style>
+  <script src="investissements.js"></script>
+</head>
+<body>
+  <header>
+    <a href="recharge.html"><button>Recharger</button></a>
+    <a href="wallet.htmk.html"><button>Retirer</button></a>
+    <a href="wallet.htmk.html"><button>Porte-monnaie</button></a>
+  </header>
+
+  <div class="unique">
+    <img src="1.jpg" width="100px" height="95px"><br>
+    <marquee><u>montre en or massif</u></marquee><br>
+    <b>prix: 5000 XAF</b><br>
+    <b>durée: 95 jours</b><br>
+    <b>revenu quotidien: 650 XAF</b><br>
+    <button id="bt1" onclick="investir(5000, 'Montre en or massif', 95, 650)">Investir</button><br>
+  </div>
+  
+  <div class="unique2">
+    <img src="2.jpg" width="100px" height="95px"><br>
+    <marquee><u>ancien lecteur de musique</u></marquee><br>
+    <b>prix: 10000 XAF</b><br>
+    <b>durée: 95 jours</b><br>
+    <b>revenu quotidien: 1100 XAF</b><br>
+    <button id="bt2" onclick="investir(10000, 'Ancien lecteur de musique', 95, 1100)">Investir</button>
+  </div>
+  
+  <div class="unique3">
+    <img src="3.jpg" width="100px" height="95px"><br>
+    <marquee><u>bijou indien</u></marquee><br>
+    <b>prix: 20000 XAF</b><br>
+    <b>durée: 95 jours</b><br>
+    <b>revenu quotidien: 4800 XAF</b><br>
+    <button id="bt3" onclick="investir(20000, 'Bijou indien', 95, 4800)">Investir</button>
+  </div>
+
+  <div class="unique4">
+    <img src="4.png" width="100px" height="95px"><br>
+    <marquee><u>statuette du symbole du sport</u></marquee><br>
+    <b>prix: 20000 XAF</b><br>
+    <b>durée: 95 jours</b><br>
+    <b>revenu quotidien: 4800 XAF</b><br>
+    <button id="bt4" onclick="investir(20000, 'Statuette du symbole du sport', 95, 4800)">Investir</button>
+  </div>
+  
+  <div class="unique5">
+    <img src="7.jpg" width="100px" height="95px"><br>
+    <marquee><u>Gold I</u></marquee><br>
+    <b>prix: 40000 XAF</b><br>
+    <b>durée: 95 jours</b><br>
+    <b>revenu quotidien: 8000 XAF</b><br>
+    <button id="bt7" onclick="investir(40000, 'Gold I', 95, 8000)">Investir</button>
+  </div>
+  
+  <div class="unique6">
+    <img src="8.jpg" width="100px" height="95px"><br>
+    <marquee><u>Gold II</u></marquee><br>
+    <b>prix: 50000 XAF</b><br>
+    <b>durée: 95 jours</b><br>
+    <b>revenu quotidien: 10000 XAF</b><br>
+    <button id="bt8" onclick="investir(50000, 'Gold II', 95, 10000)">Investir</button>
+  </div>
+
+  <script>
+    function investir(prix, nomPack, duree, revenuQuotidien) {
+      let solde = localStorage.getItem('solde') || 0;
+      solde = parseInt(solde);
+
+      if (solde >= prix) {
+        solde -= prix;
+        localStorage.setItem('solde', solde);
+        alert("Vous avez acheté le pack de : " + nomPack + "\nPrix: " + prix + " XAF\nDurée: " + duree + " jours\nRevenu quotidien: " + revenuQuotidien + " XAF");
+        // Ajoutez ici le code pour déplacer le pack vers "Investissements en cours" si nécessaire.
+      } else {
+        alert("Solde insuffisant pour acheter " + nomPack + ".");
+      }
+    }
+  </script>
+</body>
+</html>

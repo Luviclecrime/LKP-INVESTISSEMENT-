@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Investissement</title>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: Arial, sans-serif;
+    }
+    .flex-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .flex-item {
+      margin: 10px;
+      text-align: center;
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .center-content {
+      text-align: center;
+      background-color: red;
+      color: white;
+      padding: 30px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+    }
+    button {
+      border-radius: 50px;
+      padding: 15px 30px;
+      font-size: 1em;
+      cursor: pointer;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      transition: background-color 0.3s, transform 0.3s;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    button:hover {
+      background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+    button.soumettre {
+      background-color: #28a745; /* couleur verte */
+    }
+    input[type="text"], select {
+      padding: 10px;
+      font-size: 1.2em;
+      width: 80%;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+  </style>
+<script src="investissements.js"></script>
+<script src="javas.js"></script>
+</head>
+<body>
+  <div class="center-content">
+    <h1>Votre montant de recharge :</h1>
+    <input type="text" id="recharge" placeholder="Entrez le montant">
+    <br><br>
+    <i>Choisissez votre réseau :</i>
+    <select id="reseau">
+      <option value="MTN CAMEROUN">MTN CAMEROUN</option>
+      <option value="ORANGE CAMEROUN">ORANGE CAMEROUN</option>
+    </select>
+    <p id="choix-reseau"></p>
+  </div>
+  
+  <div class="flex-container">
+    <div class="flex-item">
+      <h3>Numéro de dépôt MTN :</h3>
+      <h4 style="display: inline;">654568728</h4>
+      <button id="copie-numero-mtn">Copier</button>
+    </div>
+    <div class="flex-item">
+      <h3>Numéro de dépôt ORANGE :</h3>
+      <h4 style="display: inline;">691452086</h4>
+      <button id="copie-numero-orange">Copier</button>
+    </div>
+  </div>
+  
+  <div class="flex-container">
+    <div class="flex-item">
+      <h3>Nom du compte :</h3>
+      <h4 style="display: inline;">Christian Romain Kenfack</h4>
+    </div>
+  </div>
+
+  <h2><marquee>Veuillez entrer le bon identifiant (ID) de la transaction</marquee></h2>
+  <br>
+  <input type="text" placeholder="Entrez l'ID de la transaction" id="transaction-id">
+  <br>
+  <button class="soumettre" id="soumis">Soumettre</button>
+  <button class="soumettre" id="projet">Projets en cours</button>
+
+  <script>
+    // Script pour afficher le réseau choisi
+    document.getElementById('reseau').addEventListener('change', function() {
+      var reseauChoisi = this.value;
+      document.getElementById('choix-reseau').textContent = 'Vous avez choisi le réseau : ' + reseauChoisi;
+    });
+
+    // Script pour copier le numéro MTN
+    document.getElementById('copie-numero-mtn').addEventListener('click', function() {
+      var numeroMTN = '654568728';
+      navigator.clipboard.writeText(numeroMTN);
+      alert('Numéro MTN copié : ' + numeroMTN);
+    });
+
+    // Script pour copier le numéro ORANGE
+    document.getElementById('copie-numero-orange').addEventListener('click', function() {
+      var numeroOrange = '691452086';
+      navigator.clipboard.writeText(numeroOrange);
+      alert('Numéro ORANGE copié : ' + numeroOrange);
+    });
+
+    // Script pour vérifier l'ID de la transaction
+    document.getElementById('soumis').addEventListener('click', function() {
+      var idTransaction = document.getElementById('transaction-id').value;
+      var montantRecharge = document.getElementById('recharge').value;
+      var reseauChoisi = document.getElementById('reseau').value;
+      
+      var validTransactions = {
+        '654568728': 'MTN CAMEROUN',
+        '691452086': 'ORANGE CAMEROUN'
+      };
+
+      var message;
+      if (idTransaction === montantRecharge + validTransactions[reseauChoisi]) {
+        message = 'ID de transaction correct :soumission succeful.';
+      } else {
+        message = 'ID incorrect, veuillez vérifier les informations fournies.';
+      }
+      alert(message);
+    });
+
+    // Script pour afficher les projets en cours
+    document.getElementById('projet').addEventListener('click', function() {
+      var projetsEnCours = []; // Supposons que c'est là où sont stockés les projets du client
+
+      if (projetsEnCours.length > 0) {
+        alert('Projets en cours : ' + projetsEnCours.join(', '));
+      } else {
+        alert('Aucun projet en cours.');
+      }
+    });
+  </script>
+</body>
+</html>

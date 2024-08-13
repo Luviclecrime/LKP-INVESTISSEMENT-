@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @keyframes monanimation {
+            from {
+                background-color: gold;
+                top: 0px;
+            }
+            to {
+                background-color: red;
+                top: 200px;
+            }
+        }
+        div {
+            animation-name: monanimation;
+            animation-duration: 5s;
+            animation-delay: 2s;
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            margin: 20px auto;
+        }
+        input {
+            width: calc(100% - 22px);
+            margin: 20px 10px;
+            outline: none;
+            background-color: transparent;
+            color: #fff;
+            padding: 10px 6px;
+            font-size: 18px;
+            font-weight: bold;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 1px #fff solid;
+        }
+        form {
+            background-color: blue;
+            border-radius: 20px;
+            margin: 40px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            max-width: 500px;
+        }
+        .ci {
+            color: white;
+            background-color: black;
+            border-radius: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            width: calc(100% - 40px);
+        }
+        button:hover {
+            color: aquamarine;
+        }
+        body {
+            background-color: gold;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        marquee {
+            text-shadow: 4px 4px red;
+        }
+        h1, h4 {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            font-size: large;
+        }
+        h4 {
+            font-size: medium;
+            margin: 0 20px;
+        }
+        @media only screen and (max-width: 600px) {
+            form {
+                margin: 20px;
+                padding: 20px;
+            }
+            input {
+                font-size: 16px;
+            }
+            .ci {
+                padding: 10px;
+                margin: 5px;
+            }
+            h1, h4 {
+                font-size: medium;
+            }
+            button {
+                position: relative;
+            }
+        }
+    </style>
+<script src="save.js"></script>
+</head>
+<body>
+    <div></div>
+    <center>
+        <h1><marquee behavior="" direction=""><u>Bienvenue sur notre site d'investissement fiable</u></marquee></h1>
+        <form action="">
+            <input type="password" placeholder="Votre mot de passe" class="input" id="3"><br>
+            <input type="number" placeholder="+237" class="input" id="5"><br>
+            <a href="accueil.html"><button type="button" class="ci" onclick="verification()">Se connecter</button></a>
+        </form>
+    </center>
+    <script>
+        function verification() {
+            var mots = document.getElementById("3").value;
+            var adresse = document.getElementById("5").value;
+            if (mots == "") {
+                alert('Veuillez remplir le champ mot de passe');
+            }
+            if (adresse == "") {
+                alert('Veuillez remplir le champ adresse email');
+            }
+        }
+    </script>
+</body>
+</html>
